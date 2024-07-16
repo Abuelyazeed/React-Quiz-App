@@ -9,9 +9,13 @@ function QuestionTimer({ timeout, onTimeout }) {
 
   //need useEffect as this would create an infinite loop
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setRemainingTime((prevTime) => prevTime - 100);
     }, 100);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return <progress id="question-time" max={timeout} value={remainingTime} />;

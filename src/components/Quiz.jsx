@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import QUESTIONS from '../questions';
 import quizCompleteImg from '../assets/quiz-complete.png';
 import '../index.css';
@@ -11,9 +11,11 @@ function Quiz() {
 
   const quizIsOver = activeQuestionIndex === QUESTIONS.length;
 
-  function handleSelectAnswer(selectedAnswer) {
+  const handleSelectAnswer = useCallback(function handleSelectAnswer(
+    selectedAnswer
+  ) {
     setUserAnswers((prevUserAnswers) => [...prevUserAnswers, selectedAnswer]);
-  }
+  });
 
   if (quizIsOver) {
     return (
